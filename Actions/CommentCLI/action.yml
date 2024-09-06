@@ -1,0 +1,31 @@
+description: Runs the process of adding or updating a comment in a GitHub issue or pull request.
+inputs:
+  anchor:
+    description: The anchor for the command.
+    required: true
+  body:
+    description: The body for the command.
+    required: true
+  number:
+    description: The number for the command.
+    required: true
+  owner:
+    description: The owner for the command.
+    required: true
+  repo:
+    description: The repo for the command.
+    required: true
+  token:
+    description: The token for the command.
+    required: true
+name: CommentCLI
+runs:
+  steps:
+  - name: Setup Swift
+    uses: swift-actions/setup-swift@v2
+    with:
+      swift-version: 5.10.0
+  - run: swift build --configuration release
+  - name: Run CommentCLI
+    run: swift run CommentCLI --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --body ${{ inputs.body }} --number ${{ inputs.number }} --anchor ${{ inputs.anchor }} --token ${{ inputs.token }}
+  using: composite

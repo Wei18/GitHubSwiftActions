@@ -25,9 +25,11 @@ runs:
     uses: swift-actions/setup-swift@v2
     with:
       swift-version: 5.10.0
+  - run: cd "${{ github.action_path }}/../.."
+    shell: bash
   - run: swift build --configuration release
     shell: bash
   - name: Run CommentCLI
-    run: swift run CommentCLI --token ${{ inputs.token }} --owner ${{ inputs.owner }} --body ${{ inputs.body }} --number ${{ inputs.number }} --repo ${{ inputs.repo }} --anchor ${{ inputs.anchor }}
+    run: swift run CommentCLI --anchor ${{ inputs.anchor }} --body ${{ inputs.body }} --number ${{ inputs.number }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --token ${{ inputs.token }}
     shell: bash
   using: composite

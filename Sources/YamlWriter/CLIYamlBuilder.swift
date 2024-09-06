@@ -49,6 +49,10 @@ struct CLIYamlBuilder {
                         ],
                     ],
                     [
+                        "run": #"cd "${{ github.action_path }}/../..""#,
+                        "shell": "bash",
+                    ],
+                    [
                         "run": "swift build --configuration release",
                         "shell": "bash",
                     ],
@@ -71,7 +75,11 @@ struct CLIYamlBuilder {
     ///   - inputs: A dictionary of inputs used to build the run command.
     /// - Returns: A string representing the command to execute in the GitHub Action.
     private func generateRunCommand(_ name: String, from inputs: [String: Any]) -> String {
-        let commandString = inputs.keys.map { "--\($0) ${{ inputs.\($0) }}" }.joined(separator: " ")
+        let commandString = inputs
+            .keys
+            .sorted()
+            .map { "--\($0) ${{ inputs.\($0) }}" }
+            .joined(separator: " ")
         return "swift run \(name) \(commandString)"
     }
 }

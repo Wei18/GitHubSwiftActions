@@ -18,7 +18,7 @@ inputs:
   token:
     description: The token for the command.
     required: true
-name: CommentCLI
+name: Comment
 runs:
   steps:
   - name: Setup Swift
@@ -31,6 +31,6 @@ runs:
       path: .build
       restore-keys: ${{ runner.os }}-spm-
   - name: Run CommentCLI
-    run: cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run CommentCLI --anchor ${{ inputs.anchor }} --body ${{ inputs.body }} --number ${{ inputs.number }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --token ${{ inputs.token }};
+    run: cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run Comment --anchor ${{ inputs.anchor }} --body ${{ inputs.body }} --number ${{ inputs.number }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --token ${{ inputs.token }};
     shell: bash
   using: composite

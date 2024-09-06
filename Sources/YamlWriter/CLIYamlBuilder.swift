@@ -33,7 +33,7 @@ struct CLIYamlBuilder {
         }
 
         // Define the structure of the composite action
-        let name = String(describing: command)
+        let name = String(describing: command).replacingOccurrences(of: "CLI", with: "")
         let action: [String: Any] = [
             "name": name,
             "description": description,

@@ -49,11 +49,13 @@ struct CLIYamlBuilder {
                         ],
                     ],
                     [
-                        "run": "swift build --configuration release"
+                        "run": "swift build --configuration release",
+                        "shell": "bash",
                     ],
                     [
                         "name": "Run \(String(describing: command))",
-                        "run": self.generateRunCommand(name, from: inputs)
+                        "run": self.generateRunCommand(name, from: inputs),
+                        "shell": "bash",
                     ]
                 ]
             ]

@@ -26,7 +26,7 @@ struct YamlWriterCLI: ParsableCommand {
         let path = try FileBuilder(
             content: yaml,
             commandName: String(describing: command),
-            basePath: "/Users/zw/Code/GitHubSwiftActions"
+            basePath: "/Users/zw/Documents/GitHub/GitHubSwiftActions"
         ).build()
 
         print(path)

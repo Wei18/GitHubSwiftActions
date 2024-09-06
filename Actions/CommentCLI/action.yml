@@ -26,6 +26,8 @@ runs:
     with:
       swift-version: 5.10.0
   - run: swift build --configuration release
+    shell: bash
   - name: Run CommentCLI
-    run: swift run CommentCLI --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --body ${{ inputs.body }} --number ${{ inputs.number }} --anchor ${{ inputs.anchor }} --token ${{ inputs.token }}
+    run: swift run CommentCLI --token ${{ inputs.token }} --owner ${{ inputs.owner }} --body ${{ inputs.body }} --number ${{ inputs.number }} --repo ${{ inputs.repo }} --anchor ${{ inputs.anchor }}
+    shell: bash
   using: composite

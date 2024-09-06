@@ -11,15 +11,15 @@ import ArgumentParser
 package struct CommentCLI: ParsableCommand {
 
     /// The GitHub repository owner.
-    @Argument(help: "The owner of the GitHub repository.")
+    @Option(name: .shortAndLong, help: "The owner of the GitHub repository.")
     var owner: String
 
     /// The GitHub repository name.
-    @Argument(help: "The name of the GitHub repository.")
+    @Option(name: .shortAndLong, help: "The name of the GitHub repository.")
     var repo: String
 
     /// The issue or pull request number.
-    @Argument(help: "The issue or pull request number.")
+    @Option(name: .shortAndLong, help: "The issue or pull request number.")
     var number: Int
 
     /// The unique anchor to identify the comment.
@@ -27,7 +27,7 @@ package struct CommentCLI: ParsableCommand {
     var anchor: String
 
     /// The body content of the comment.
-    @Argument(help: "The body content of the comment.")
+    @Option(name: .shortAndLong, help: "The body content of the comment.")
     var body: String
 
     /// The GitHub API token for authentication.

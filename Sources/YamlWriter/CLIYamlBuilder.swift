@@ -93,9 +93,8 @@ struct CLIYamlBuilder {
     /// ```
     private func generateRunCommand(_ name: String) -> String {
         let cd = #"cd "${{ github.action_path }}/../..";"#
-        let build = #"swift build --configuration release;"#
-        let run = #"swift run \#(name); "#
-        return #"\#(cd) \#(build) \#(run)"#
+        let run = #"swift run --configuration release --quiet \#(name);"#
+        return #"\#(cd) \#(run)"#
     }
 
 }

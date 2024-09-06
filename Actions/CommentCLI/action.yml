@@ -25,6 +25,11 @@ runs:
     uses: swift-actions/setup-swift@v2
     with:
       swift-version: 5.10.0
+  - uses: actions/cache@v4
+    with:
+      key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+      path: .build
+      restore-keys: ${{ runner.os }}-spm-
   - name: Run CommentCLI
     run: cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run CommentCLI --anchor ${{ inputs.anchor }} --body ${{ inputs.body }} --number ${{ inputs.number }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --token ${{ inputs.token }};
     shell: bash

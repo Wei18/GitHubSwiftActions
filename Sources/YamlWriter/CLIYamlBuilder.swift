@@ -49,6 +49,14 @@ struct CLIYamlBuilder {
                         ],
                     ],
                     [
+                        "uses": "actions/cache@v4",
+                        "with": [
+                            "path": ".build",
+                            "key": "${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}",
+                            "restore-keys": "${{ runner.os }}-spm-",
+                        ]
+                    ],
+                    [
                         "name": "Run \(String(describing: command))",
                         "run": self.generateRunCommand(name, from: inputs),
                         "shell": "bash",

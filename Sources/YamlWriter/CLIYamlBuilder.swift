@@ -49,14 +49,6 @@ struct CLIYamlBuilder {
                         ],
                     ],
                     [
-                        "run": #"cd "${{ github.action_path }}/../..""#,
-                        "shell": "bash",
-                    ],
-                    [
-                        "run": "swift build --configuration release",
-                        "shell": "bash",
-                    ],
-                    [
                         "name": "Run \(String(describing: command))",
                         "run": self.generateRunCommand(name, from: inputs),
                         "shell": "bash",
@@ -80,7 +72,10 @@ struct CLIYamlBuilder {
             .sorted()
             .map { "--\($0) ${{ inputs.\($0) }}" }
             .joined(separator: " ")
-        return "swift run \(name) \(commandString)"
+        let cd = #"cd "${{ github.action_path }}/../..";"#
+        let build = #"swift build --configuration release;"#
+        let run = #"swift run \#(name) \#(commandString);"#
+        return #"\#(cd) \#(build) \#(run)"#
     }
 }
 

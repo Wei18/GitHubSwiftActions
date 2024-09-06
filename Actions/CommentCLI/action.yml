@@ -30,7 +30,14 @@ runs:
       key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
       path: .build
       restore-keys: ${{ runner.os }}-spm-
-  - name: Run CommentCLI
-    run: cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run Comment --anchor ${{ inputs.anchor }} --body ${{ inputs.body }} --number ${{ inputs.number }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --token ${{ inputs.token }};
+  - env:
+      ANCHOR: ${{ inputs.anchor }}
+      BODY: ${{ inputs.body }}
+      NUMBER: ${{ inputs.number }}
+      OWNER: ${{ inputs.owner }}
+      REPO: ${{ inputs.repo }}
+      TOKEN: ${{ inputs.token }}
+    name: Run Comment
+    run: 'cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run Comment; '
     shell: bash
   using: composite

@@ -38,6 +38,6 @@ runs:
       REPO: ${{ inputs.repo }}
       TOKEN: ${{ inputs.token }}
     name: Run Comment
-    run: 'cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run Comment; '
+    run: cd "${{ github.action_path }}/../.."; swift run --configuration release --quiet Comment;
     shell: bash
   using: composite

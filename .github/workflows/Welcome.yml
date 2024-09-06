@@ -1,0 +1,28 @@
+name: Welcome
+
+on:
+  issues:
+    types: [opened, reopened]
+
+jobs:
+  say-hello-to-reporter:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Comment on issue
+      uses: Wei18/GitHubSwiftActions/Actions/CommentCLI@main
+      with:
+        number: ${{ github.event.issue.number }}
+        body: |
+          Hello @${{ github.event.issue.user.login }},
+
+          Thank you for opening this issue! We will review it and get back to you as soon as possible.
+
+          If you have any additional details or questions, please feel free to update this issue.
+
+          Best regards,
+          Wei
+        owner: ${{ github.repository_owner }}
+        repo: ${{ github.repository }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        anchor: "welcome-comment"

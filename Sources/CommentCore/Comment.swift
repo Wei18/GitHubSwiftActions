@@ -68,7 +68,7 @@ struct Comment {
         let hidingContent = "<!-- Comment anchor: \(anchor) -->"
 
         // Combine the new body with the hidden anchor content.
-        let newBody = "\(body)\n\n\(hidingContent)"
+        let newBody = "\(hidingContent)\(body)"
 
         // Fetch all comments for the issue or pull request.
         let comments = try await client.issues_sol_list_hyphen_comments(

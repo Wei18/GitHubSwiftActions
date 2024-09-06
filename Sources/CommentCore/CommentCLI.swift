@@ -57,7 +57,7 @@ package struct CommentCLI: ParsableCommand {
                 try await comment.run()
                 print("Comment successfully created/updated!")
             } catch {
-                print("Failed to create/update comment: \(error)")
+                CommentCLI.exit(withError: error)
             }
         }
     }

@@ -56,7 +56,7 @@ struct CLIYamlBuilder {
                         "uses": "actions/cache@v4",
                         "with": [
                             "path": ".build",
-                            "key": "${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}",
+                            "key": "${{ runner.os }}-spm-${{ hashFiles('/Package.resolved') }}",
                             "restore-keys": "${{ runner.os }}-spm-",
                         ]
                     ],

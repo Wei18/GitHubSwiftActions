@@ -41,11 +41,18 @@ package struct Comment: ParsableCommand {
         Task.synchronous {
             do {
                 let owner = ProcessInfo.processInfo.environment["OWNER"] ?? owner
+                print("inputs.owner: \(owner)")
                 let repo = ProcessInfo.processInfo.environment["REPO"] ?? repo
+                print("inputs.repo: \(repo)")
                 let number = try Int(try: ProcessInfo.processInfo.environment["NUMBER"] ?? number)
+                print("inputs.number: \(number)")
                 let anchor = ProcessInfo.processInfo.environment["ANCHOR"] ?? anchor
+                print("inputs.anchor: \(anchor)")
                 let body = ProcessInfo.processInfo.environment["BODY"] ?? body
+                print("inputs.body: \(body)")
                 let token = ProcessInfo.processInfo.environment["TOKEN"] ?? token
+                print("inputs.token: \(token)")
+                
                 let comment = try CommentUseCase(
                     token: token,
                     owner: owner,

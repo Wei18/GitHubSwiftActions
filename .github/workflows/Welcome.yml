@@ -10,14 +10,12 @@ jobs:
 
     steps:
     - name: Comment on issue
-      uses: Wei18/GitHubSwiftActions/Actions/CommentCLI@main
+      uses: Wei18/GitHubSwiftActions/Actions/Comment@main
       with:
         number: ${{ github.event.issue.number }}
         body: |
           Hello @${{ github.event.issue.user.login }},
-
           Thank you for opening this issue! We will review it and get back to you as soon as possible.
-
           If you have any additional details or questions, please feel free to update this issue.
 
           Best regards,

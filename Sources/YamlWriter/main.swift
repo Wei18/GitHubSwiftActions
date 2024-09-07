@@ -17,7 +17,7 @@ struct YamlWriterCLI: ParsableCommand {
     }
 
     private func makeCommentCLIYaml() throws {
-        let command = CommentCLI.self
+        let command = Comment.self
         let yaml = try CLIYamlBuilder().build(
             command: command,
             description: "Runs the process of adding or updating a comment in a GitHub issue or pull request.")
@@ -25,7 +25,7 @@ struct YamlWriterCLI: ParsableCommand {
         // FIXME: basePath
         let path = try FileBuilder(
             content: yaml,
-            commandName: String(describing: command),
+            command: command,
             basePath: "/Users/zw/Documents/GitHub/GitHubSwiftActions"
         ).build()
 

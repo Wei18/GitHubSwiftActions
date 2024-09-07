@@ -36,8 +36,9 @@ struct CLIYamlBuilder {
             partialResult[value.uppercased()] = "${{ inputs.\(value) }}"
         }
 
+        let name = String(describing: command)
+
         // Define the structure of the composite action
-        let name = String(describing: command).replacingOccurrences(of: "CLI", with: "")
         let action: [String: Any] = [
             "name": name,
             "description": description,
@@ -62,41 +63,18 @@ struct CLIYamlBuilder {
                     ],
                     [
                         "name": "Run \(name)",
-                        "run": self.generateRunCommand(name),
+                        // FIXME: owner/repo
+                        "run": "mint run Wei18/GitHubSwiftActions@main \(name)",
                         "env": envDict,
                         "shell": "bash",
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ]
 
         // Convert the dictionary to a YAML string using Yams
         return try Yams.dump(object: action, width: -1, sortKeys: true)
     }
-
-    /// Generates a command string to navigate to the repository root, build a Swift project, and run a specified Swift executable.
-    ///
-    /// - Parameter name: The name of the Swift executable to run. This is typically the name of the target or the executable product defined in your Swift package.
-    ///
-    /// - Returns: A string representing the complete shell command to navigate to the repository root, build the Swift project in release configuration, and run the specified executable.
-    ///
-    /// The generated command includes:
-    /// 1. Changing the directory to the root of the repository (relative to the GitHub Action path).
-    /// 2. Building the Swift project using the `swift build` command with the `release` configuration.
-    /// 3. Running the specified Swift executable using the `swift run` command.
-    ///
-    /// Example:
-    /// ```
-    /// let command = generateRunCommand("CommentCLI")
-    /// print(command)
-    /// // Output: cd "${{ github.action_path }}/../.."; swift build --configuration release; swift run CommentCLI
-    /// ```
-    private func generateRunCommand(_ name: String) -> String {
-        let cd = #"cd "${{ github.action_path }}/../..";"#
-        let run = #"swift run --configuration release --quiet \#(name);"#
-        return #"\#(cd) \#(run)"#
-    }
-
 }
 
 

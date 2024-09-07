@@ -7,5 +7,5 @@
 
 import CommentCore
 
-CommentCLI.main()
+Comment.main()
 

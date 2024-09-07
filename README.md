@@ -1,20 +1,18 @@
-# Work In Progress (Beta)
-
-# GitHub Swift Actions
+# GitHub Swift Actions (Beta)
 
 ## Overview
 
-This repository contains a GitHub Composite Action built using Swift. The primary action provided here is `CommentCLI`, which allows you to comment on GitHub issues from a CLI tool written in Swift.
+This repository contains GitHub Composite Actions built using Swift. 
 
-## Action: CommentCLI
+## Action: Comment
 
 ### Description
 
-The `CommentCLI` action comments on GitHub issues using a Swift CLI tool. You can use it to automatically post comments when issues are opened or reopened.
+The `Comment` action comments on GitHub issues using a Swift CLI tool. You can use it to automatically craete or update comments.
 
 ### Inputs
 
-The `CommentCLI` action requires the following inputs:
+The `Comment` action requires the following inputs:
 
 - **`number`**: (required) The issue number to comment on.
 - **`body`**: (required) The body of the comment.
@@ -25,54 +23,15 @@ The `CommentCLI` action requires the following inputs:
 
 ### Example Usage
 
-To use the `CommentCLI` action in a GitHub Actions workflow, create a YAML file in the `.github/workflows` directory of your repository:
-
-```yaml
-name: Welcome
-
-on:
-  issues:
-    types: [opened, reopened]
-
-jobs:
-  say-hello-to-reporter:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Comment on issue
-      uses: Wei18/GitHubSwiftActions/Actions/CommentCLI@main
-      with:
-        number: ${{ github.event.issue.number }}
-        body: |
-          Hello @${{ github.event.issue.user.login }},
-
-          Thank you for opening this issue! We will review it and get back to you as soon as possible.
-
-          If you have any additional details or questions, please feel free to update this issue.
-
-          Best regards,
-          The Team
-        owner: ${{ github.repository_owner }}
-        repo: ${{ github.repository }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        anchor: "welcome-comment"
-```
-
-## Action Structure
-
-- **`action.yml`**: The action definition file.
-- **`Sources/`**: Contains the Swift source code for the CLI tool.
-- **`.github/workflows/`**: Contains GitHub Actions workflow files for testing and deployment.
+To use the `Comment` action in a GitHub Actions workflow, create a YAML file in the `.github/workflows` directory of your repository:
+https://github.com/Wei18/GitHubSwiftActions/blob/fb343bbc4a35efa451043286dd4d0784658fe8d2/.github/workflows/Welcome.yml#L1-L28
 
 ## Building the Action
 
-To build the `CommentCLI` action locally, use:
+To run the `Comment` action locally, use:
 
 ```sh
-swift build --configuration release
+swift run --configuration release Comment
 ```
 
 ## Contributing

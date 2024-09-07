@@ -21,15 +21,8 @@ inputs:
 name: Comment
 runs:
   steps:
-  - name: Setup Swift
-    uses: swift-actions/setup-swift@v2
-    with:
-      swift-version: 5.10.0
-  - uses: actions/cache@v4
-    with:
-      key: ${{ runner.os }}-spm-${{ hashFiles('/Package.resolved') }}
-      path: .build
-      restore-keys: ${{ runner.os }}-spm-
+  - name: Setup Swift, Mint, Cache, etc.
+    uses: Wei18/GitHubSwiftActions/Actions/SetUp@main
   - env:
       ANCHOR: ${{ inputs.anchor }}
       BODY: ${{ inputs.body }}
@@ -38,6 +31,6 @@ runs:
       REPO: ${{ inputs.repo }}
       TOKEN: ${{ inputs.token }}
     name: Run Comment
-    run: cd "${{ github.action_path }}/../.."; swift run --configuration release --quiet Comment;
+    run: mint run Wei18/GitHubSwiftActions@main Comment
     shell: bash
   using: composite

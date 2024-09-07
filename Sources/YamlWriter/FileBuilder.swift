@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 struct FileBuilder {
     let content: String
@@ -16,11 +17,11 @@ struct FileBuilder {
     ///
     /// - Parameters:
     ///   - content: The content (YAML) to be written to the file.
-    ///   - commandName: The name of the command, which will be used to create the subdirectory under `Actions/`.
+    ///   - command: The ParsableCommand type to inspect.
     ///   - basePath: Optional path to the base directory, such as the repo's root. If `nil`, defaults to current directory.
-    init(content: String, commandName: String, basePath: String? = nil) {
+    init<T: ParsableCommand>(content: String, command: T.Type, basePath: String? = nil) {
         self.content = content
-        self.commandName = commandName
+        self.commandName = String(describing: command)
         self.basePath = basePath
     }
 

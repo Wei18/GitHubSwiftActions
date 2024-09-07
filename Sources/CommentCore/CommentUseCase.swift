@@ -77,13 +77,13 @@ struct CommentUseCase {
 
         // Try to find an existing comment with the hidden anchor content.
         if let comment = comments.first(where: { $0.body?.contains(hidingContent) == true }) {
-            // Update the existing comment with the new body content.
+            print("Update the existing comment with the new body content.")
             _ = try await client.issues_sol_update_hyphen_comment(
                 path: .init(owner: owner, repo: repo, comment_id: Components.Parameters.comment_hyphen_id(comment.id)),
                 body: .json(.init(body: newBody))
             )
         } else {
-            // Create a new comment if no existing comment with the anchor is found.
+            print("Create a new comment if no existing comment with the anchor is found.")
             _ = try await client.issues_sol_create_hyphen_comment(
                 path: .init(owner: owner, repo: repo, issue_number: number),
                 body: .json(.init(body: newBody))

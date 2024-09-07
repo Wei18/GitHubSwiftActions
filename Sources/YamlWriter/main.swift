@@ -23,13 +23,20 @@ struct YamlWriterCLI: ParsableCommand {
             description: "Runs the process of adding or updating a comment in a GitHub issue or pull request.")
 
         // FIXME: basePath
-        let path = try FileBuilder(
+        let actionPath = try FileBuilder(
             content: yaml,
             command: command,
             basePath: "/Users/zw/Documents/GitHub/GitHubSwiftActions"
         ).build()
 
-        print(path)
+        try FileBuilder(
+            content: "Wei18/GitHubSwiftActions@main",
+            command: command,
+            basePath: "/Users/zw/Documents/GitHub/GitHubSwiftActions",
+            file: "Mintfile"
+        ).build()
+
+        print(actionPath)
     }
 }
 

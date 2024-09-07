@@ -4,6 +4,16 @@
 
 This repository contains GitHub Composite Actions built using Swift. 
 
+## Ideas  
+This is a series of combinations:  
+- To create convenient use cases, a Swift package executable was created,  
+  - utilizing the OAS dependency: [github-rest-api-swift-openapi](https://github.com/Wei18/github-rest-api-swift-openapi)  
+- To create GitHub Composite Actions,  
+  - the Yams dependency is used: [Yams](https://github.com/jpsim/Yams)  
+- Then, GitHub Actions are utilized  
+  - to build the Swift package executable via Mint: [Mint](https://github.com/yonaskolb/Mint)  
+  - and to cache the Swift package executable via: [setup-mint](https://github.com/irgaly/setup-mint)
+
 ## Action: Comment
 
 ### Description

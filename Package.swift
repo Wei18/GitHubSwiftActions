@@ -8,6 +8,9 @@ let package = Package(
     platforms: [
         .macOS(.v10_15),
     ],
+    products: [
+        .executable(name: "Comment", targets: ["Comment"]),
+    ],
     dependencies: [
         .package(url: "https://github.com/Wei18/github-rest-api-swift-openapi", from: "2.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),

@@ -31,6 +31,6 @@ runs:
       REPO: ${{ inputs.repo }}
       TOKEN: ${{ inputs.token }}
     name: Run Comment
-    run: mint run Wei18/GitHubSwiftActions@main Comment
+    run: ~/.mint/bin/mint run Wei18/GitHubSwiftActions@main Comment
     shell: bash
   using: composite

@@ -47,24 +47,13 @@ struct CLIYamlBuilder {
                 "using": "composite",
                 "steps": [
                     [
-                        "name": "Setup Swift",
-                        "uses": "swift-actions/setup-swift@v2",
-                        "with": [
-                            "swift-version": "5.10.0",
-                        ],
-                    ],
-                    [
-                        "uses": "actions/cache@v4",
-                        "with": [
-                            "path": "../../.build",
-                            "key": "${{ runner.os }}-spm-${{ hashFiles('/Package.resolved') }}",
-                            "restore-keys": "${{ runner.os }}-spm-",
-                        ]
+                        "name": "Setup Swift, Mint, Cache, etc.",
+                        "uses": "Wei18/GitHubSwiftActions/Actions/SetUp@main",
                     ],
                     [
                         "name": "Run \(name)",
                         // FIXME: owner/repo
-                        "run": "mint run Wei18/GitHubSwiftActions@main \(name)",
+                        "run": "~/.mint/bin/mint run Wei18/GitHubSwiftActions@main \(name)",
                         "env": envDict,
                         "shell": "bash",
                     ],

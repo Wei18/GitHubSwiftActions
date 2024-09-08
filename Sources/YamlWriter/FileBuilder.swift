@@ -11,7 +11,7 @@ import ArgumentParser
 struct FileBuilder {
     let content: String
     let commandName: String
-    let basePath: String?
+    let basePath: URL
     let file: String
 
     /// Initializes the `FileBuilder` with the content to be written and the command name.
@@ -19,9 +19,9 @@ struct FileBuilder {
     /// - Parameters:
     ///   - content: The content (YAML) to be written to the file.
     ///   - command: The ParsableCommand type to inspect.
-    ///   - basePath: Optional path to the base directory, such as the repo's root. If `nil`, defaults to current directory.
+    ///   - basePath: The path to the base directory.
     ///   - file: Define the file path. (default: action.yml)
-    init<T: ParsableCommand>(content: String, command: T.Type, basePath: String? = nil, file: String = "action.yml") {
+    init<T: ParsableCommand>(content: String, command: T.Type, basePath: URL, file: String = "action.yml") {
         self.content = content
         self.commandName = String(describing: command)
         self.basePath = basePath
@@ -33,11 +33,10 @@ struct FileBuilder {
     /// - Returns: The path to the generated file.
     @discardableResult
     func build() throws -> String {
-        // Use the base path if provided, otherwise use the current directory
-        let rootPath = basePath ?? FileManager.default.currentDirectoryPath
-
-        // Define the path to the Actions directory
-        let actionsPath = "\(rootPath)/Actions/\(commandName)"
+        // Define the path to the action directory
+        let actionsPath = basePath
+            .appendingPathComponent(commandName)
+            .path
 
         // Create the directory structure if it doesn't exist
         try FileManager.default.createDirectory(atPath: actionsPath, withIntermediateDirectories: true)

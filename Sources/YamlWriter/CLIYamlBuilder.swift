@@ -37,6 +37,7 @@ struct CLIYamlBuilder {
         }
 
         let name = String(describing: command)
+        let repo = "Wei18/GitHubSwiftActions"
 
         // Define the structure of the composite action
         let action: [String: Any] = [
@@ -48,12 +49,11 @@ struct CLIYamlBuilder {
                 "steps": [
                     [
                         "name": "Setup Swift, Mint, Cache, etc.",
-                        "uses": "Wei18/GitHubSwiftActions/Actions/SetUp@main",
+                        "uses": "\(repo)/Actions/SetUp@main",
                     ],
                     [
                         "name": "Run \(name)",
-                        // FIXME: owner/repo
-                        "run": "~/.mint/bin/mint run Wei18/GitHubSwiftActions@main \(name)",
+                        "run": "~/.mint/bin/mint run \(repo)@main \(name)",
                         "env": envDict,
                         "shell": "bash",
                     ],

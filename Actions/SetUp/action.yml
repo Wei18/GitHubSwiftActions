@@ -2,23 +2,13 @@ name: SetUp
 runs:
   using: composite
   steps:
-    - name: Setup Swift
+    - name: "Setup Swift"
       uses: swift-actions/setup-swift@v2
       with:
         swift-version: 5.10.0
 
-    - name: Cache Packagge
-      uses: actions/cache@v4
-      with:
-        path: |
-          .build
-          ~/Library/Caches/org.swift.swiftpm/
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-        restore-keys: |
-          ${{ runner.os }}-spm-
-
     - name: "Setup Mint"
       uses: irgaly/setup-mint@v1
       with:
+        mint-directory: ${{ github.action_path }}
         mint-executable-directory: "~/.mint/bin"
-

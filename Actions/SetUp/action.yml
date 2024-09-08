@@ -12,3 +12,4 @@ runs:
       with:
         mint-directory: ${{ github.action_path }}
         mint-executable-directory: "~/.mint/bin"
+        cache-prefix: "GitHubSwiftActions"

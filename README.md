@@ -34,7 +34,7 @@ The `Comment` action requires the following inputs:
 ### Example Usage
 
 To use the `Comment` action in a GitHub Actions workflow, create a YAML file in the `.github/workflows` directory of your repository:
-https://github.com/Wei18/GitHubSwiftActions/blob/e5ef352898a8b515512d22f4f0eaf7afe4a555fa/.github/workflows/Welcome.yml#L1-L25
+https://github.com/Wei18/GitHubSwiftActions/blob/5e993bca0d3f050c590790954440a5953c81aeee/.github/workflows/Welcome.yml#L1-L24
 
 ## Building the Action
 

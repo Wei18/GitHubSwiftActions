@@ -53,7 +53,7 @@ struct CLIYamlBuilder {
                     ],
                     [
                         "name": "Run \(name)",
-                        "run": "~/.mint/bin/mint run \(repo)@main \(name)",
+                        "run": "~/.mint/bin/mint run \(repo) \(name)",
                         "env": envDict,
                         "shell": "bash",
                     ],

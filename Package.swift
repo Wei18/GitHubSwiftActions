@@ -23,6 +23,12 @@ let package = Package(
             name: "Comment",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .target(name: "CommentCLI"),
+            ]
+        ),
+        .target(
+            name: "CommentCLI",
+            dependencies: [
                 .target(name: "CommentCore"),
             ]
         ),
@@ -37,7 +43,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Yams", package: "Yams"),
-                .target(name: "CommentCore"),
+                .target(name: "CommentCLI"),
             ]
         )
     ]

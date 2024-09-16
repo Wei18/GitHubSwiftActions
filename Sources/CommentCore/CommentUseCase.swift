@@ -10,7 +10,7 @@ import GitHubRestAPIIssues
 import OpenAPIURLSession
 
 /// A struct representing a GitHub issue or pull request comment, which interacts with the GitHub REST API.
-struct CommentUseCase {
+package struct CommentUseCase {
 
     /// The client used to interact with GitHub's REST API for issues.
     private let client: GitHubRestAPIIssues.Client
@@ -41,7 +41,7 @@ struct CommentUseCase {
     ///   - number: The issue or pull request number.
     ///   - anchor: A unique anchor used to identify the comment in future interactions.
     ///   - body: The body content of the comment.
-    init(token: String, owner: String, repo: String, number: Int, anchor: String, body: String) throws {
+    package init(token: String, owner: String, repo: String, number: Int, anchor: String, body: String) throws {
         self.client = Client(
             serverURL: try Servers.server1(),
             transport: URLSessionTransport(),
@@ -63,7 +63,7 @@ struct CommentUseCase {
     /// 4. If no comment with the anchor is found, a new comment is created.
     ///
     /// - Throws: An error if the GitHub API request fails.
-    func run() async throws {
+    package func run() async throws {
         // Hidden content that allows us to identify the comment later by its anchor.
         let hidingContent = "<!-- Comment anchor: \(anchor) -->"
 

@@ -7,7 +7,7 @@
 
 import Foundation
 import ArgumentParser
-import CommentCore
+import CommentCLI
 
 /// A command-line interface for building a GitHub Composite Action YAML based on a ParsableCommand.
 struct YamlWriterCLI: ParsableCommand {

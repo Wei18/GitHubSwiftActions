@@ -7,6 +7,7 @@
 
 import Foundation
 import ArgumentParser
+import CommentCore
 
 /// A command-line interface for creating or updating a comment on a GitHub issue or pull request.
 package struct Comment: ParsableCommand {

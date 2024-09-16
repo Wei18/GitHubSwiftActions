@@ -5,7 +5,7 @@
 //  Created by zwc on 2024/9/7.
 //
 
-import CommentCore
+import CommentCLI
 
 Comment.main()
 

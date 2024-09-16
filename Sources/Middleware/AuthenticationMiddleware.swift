@@ -10,17 +10,17 @@ import HTTPTypes
 import Foundation
 
 /// Injects an authorization header to every request.
-struct AuthenticationMiddleware: ClientMiddleware {
+package struct AuthenticationMiddleware: ClientMiddleware {
 
     private let token: String
 
-    init(token: String) {
+    package init(token: String) {
         self.token = token
     }
     
     private var header: [String: String] { ["Authorization": "Bearer \(token)" ] }
 
-    func intercept(
+    package func intercept(
         _ request: HTTPRequest,
         body: HTTPBody?,
         baseURL: URL,

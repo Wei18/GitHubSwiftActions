@@ -8,6 +8,7 @@
 import Foundation
 import GitHubRestAPIIssues
 import OpenAPIURLSession
+import Middleware
 
 /// A struct representing a GitHub issue or pull request comment, which interacts with the GitHub REST API.
 package struct CommentUseCase {

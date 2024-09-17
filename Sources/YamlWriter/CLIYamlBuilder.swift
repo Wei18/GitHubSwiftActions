@@ -39,7 +39,6 @@ struct CLIYamlBuilder {
         let name = String(describing: command)
         let repo = SwiftPackageConfig.current.repo
         let version = SwiftPackageConfig.current.version
-        let packageForMint = SwiftPackageConfig.current.packageForMint
 
         // Define the structure of the composite action
         let action: [String: Any] = [
@@ -55,7 +54,7 @@ struct CLIYamlBuilder {
                     ],
                     [
                         "name": "Run \(name)",
-                        "run": "~/.mint/bin/mint run \(packageForMint) \(name)",
+                        "run": "~/.mint/bin/mint run \(repo) \(name)",
                         "env": envDict,
                         "shell": "bash",
                     ],
@@ -67,5 +66,3 @@ struct CLIYamlBuilder {
         return try Yams.dump(object: action, width: -1, sortKeys: true)
     }
 }
-
-

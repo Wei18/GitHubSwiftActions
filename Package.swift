@@ -10,6 +10,7 @@ let package = Package(
     ],
     products: [
         .executable(name: "Comment", targets: ["Comment"]),
+        .executable(name: "Release", targets: ["Release"]),
     ],
     dependencies: [
         .package(url: "https://github.com/Wei18/github-rest-api-swift-openapi", from: "2.0.0"),
@@ -18,8 +19,7 @@ let package = Package(
         .package(url: "https://github.com/jpsim/Yams", from: "5.0.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
+        //
         .executableTarget(
             name: "Comment",
             dependencies: [
@@ -39,6 +39,29 @@ let package = Package(
             dependencies: [
                 .product(name: "GitHubRestAPIIssues", package: "github-rest-api-swift-openapi"),
                 .target(name: "Middleware"),
+            ]
+        ),
+        //
+        .executableTarget(
+            name: "Release",
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .target(name: "ReleaseCLI"),
+            ]
+        ),
+        .target(
+            name: "ReleaseCLI",
+            dependencies: [
+                .target(name: "ReleaseCore"),
+                .target(name: "Extensions"),
+            ]
+        ),
+        .target(
+            name: "ReleaseCore",
+            dependencies: [
+                .product(name: "GitHubRestAPIRepos", package: "github-rest-api-swift-openapi"),
+                .target(name: "Middleware"),
+                .target(name: "Extensions"),
             ]
         ),
         .target(

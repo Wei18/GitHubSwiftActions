@@ -19,7 +19,7 @@ name: Release
 runs:
   steps:
   - name: Setup Swift, Mint, Cache, etc.
-    uses: ./Actions/SetUp
+    uses: ${{ github.action_path }}/../SetUp
   - env:
       OWNER: ${{ inputs.owner }}
       REF: ${{ inputs.ref }}

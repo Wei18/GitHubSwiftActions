@@ -54,8 +54,8 @@ package struct Comment: ParsableCommand {
                 print("inputs.body: \(body)")
                 let token = ProcessInfo.processInfo.environment["TOKEN"] ?? token
                 print("inputs.token: \(token)")
-                
-                let comment = try CommentUseCase(
+
+                let useCase = try CommentUseCase(
                     token: token,
                     owner: owner,
                     repo: repo,
@@ -63,10 +63,10 @@ package struct Comment: ParsableCommand {
                     anchor: anchor,
                     body: body
                 )
-                try await comment.run()
+                try await useCase.run()
                 print("Comment successfully created/updated!")
             } catch {
-                Comment.exit(withError: error)
+                Self.exit(withError: error)
             }
         }
     }

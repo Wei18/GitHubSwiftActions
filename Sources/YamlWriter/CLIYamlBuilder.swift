@@ -46,11 +46,7 @@ struct CLIYamlBuilder {
             "inputs": inputs,
             "runs": [
                 "using": "composite",
-                "steps": [
-                    [
-                        "name": "Setup Swift, Mint, Cache, etc.",
-                        "uses": "./Actions/SetUp",
-                    ],
+                "steps": SetUpActionBuilder().build() + [
                     [
                         "name": "Run \(name)",
                         "run": "~/.mint/bin/mint run \(repo) \(name)",
@@ -63,5 +59,36 @@ struct CLIYamlBuilder {
 
         // Convert the dictionary to a YAML string using Yams
         return try Yams.dump(object: action, width: -1, sortKeys: true)
+    }
+}
+
+private struct SetUpActionBuilder {
+    func build() -> [[String: Any]] {
+        let content = "\(SwiftPackageConfig.current.repo)@${{ github.action_ref }}"
+        let action: [[String: Any]] = [
+            [
+                "name": "Setup Swift",
+                "uses": "swift-actions/setup-swift@v2",
+                "with": [
+                    "swift-version": "5.10.0",
+                ],
+            ],
+            [
+                "name": "Create Mintfile",
+                "run": "echo \(content) > ${{ github.action_path }}/Mintfile",
+                "shell": "bash",
+            ],
+            [
+                "name": "Setup Mint",
+                "uses": "irgaly/setup-mint@v1",
+                "with": [
+                    "mint-directory": "${{ github.action_path }}",
+                    "mint-executable-directory": "~/.mint/bin",
+                    "cache-prefix": "GitHubSwiftActions",
+                ],
+
+            ],
+        ]
+        return action
     }
 }

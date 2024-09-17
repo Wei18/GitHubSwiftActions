@@ -14,7 +14,5 @@ struct SwiftPackageConfig {
 
     let repo = "Wei18/GitHubSwiftActions"
 
-    var packageForMint: String { "\(repo)@\(version)" }
-
     private init() {}
 }

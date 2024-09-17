@@ -41,11 +41,12 @@ struct YamlWriterCLI: ParsableCommand {
 
     private func makeMintfile() throws {
         struct SetUp: ParsableCommand {}
+        let command = SetUp.self
+        let yaml = try SetUpActionBuilder().build()
         let actionPath = try FileBuilder(
-            content: SwiftPackageConfig.current.packageForMint,
-            command: SetUp.self,
-            basePath: packDirectory().appendingPathComponent("Actions"),
-            file: "Mintfile"
+            content: yaml,
+            command: command,
+            basePath: packDirectory().appendingPathComponent("Actions")
         ).build()
         print(actionPath)
     }

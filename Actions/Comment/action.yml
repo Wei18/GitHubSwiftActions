@@ -22,7 +22,7 @@ name: Comment
 runs:
   steps:
   - name: Setup Swift, Mint, Cache, etc.
-    uses: Wei18/GitHubSwiftActions/Actions/SetUp@main
+    uses: ./Actions/SetUp
   - env:
       ANCHOR: ${{ inputs.anchor }}
       BODY: ${{ inputs.body }}

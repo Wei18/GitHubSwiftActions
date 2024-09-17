@@ -76,6 +76,7 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Yams", package: "Yams"),
                 .target(name: "CommentCLI"),
+                .target(name: "ReleaseCLI"),
             ]
         ),
         .target(name: "Extensions")

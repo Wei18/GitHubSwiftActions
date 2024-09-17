@@ -1,5 +1,7 @@
 description: Runs the process of adding or updating a comment in a GitHub issue or pull request.
 inputs:
+  action_ref:
+    default: ${{ github.action_ref }}
   anchor:
     description: The anchor for the command.
     required: true
@@ -26,7 +28,7 @@ runs:
     with:
       swift-version: 5.10.0
   - name: Create Mintfile
-    run: echo Wei18/GitHubSwiftActions@${{ github.action_ref }} > ${{ github.action_path }}/Mintfile
+    run: echo Wei18/GitHubSwiftActions@${{ inputs.action_ref }} > ${{ github.action_path }}/Mintfile
     shell: bash
   - name: Setup Mint
     uses: irgaly/setup-mint@v1
@@ -35,6 +37,7 @@ runs:
       mint-directory: ${{ github.action_path }}
       mint-executable-directory: ~/.mint/bin
   - env:
+      ACTION_REF: ${{ inputs.action_ref }}
       ANCHOR: ${{ inputs.anchor }}
       BODY: ${{ inputs.body }}
       NUMBER: ${{ inputs.number }}

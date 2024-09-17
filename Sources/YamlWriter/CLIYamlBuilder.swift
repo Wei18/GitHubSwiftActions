@@ -32,6 +32,8 @@ struct CLIYamlBuilder {
             ]
         }
 
+        inputs.merge(SetUpActionBuilder().buildInputs()) { _, new in new }
+
         let envDict = inputs.keys.reduce(into: [:]) { partialResult, value in
             partialResult[value.uppercased()] = "${{ inputs.\(value) }}"
         }
@@ -46,7 +48,7 @@ struct CLIYamlBuilder {
             "inputs": inputs,
             "runs": [
                 "using": "composite",
-                "steps": SetUpActionBuilder().build() + [
+                "steps": SetUpActionBuilder().buildSteps() + [
                     [
                         "name": "Run \(name)",
                         "run": "~/.mint/bin/mint run \(repo) \(name)",
@@ -63,8 +65,18 @@ struct CLIYamlBuilder {
 }
 
 private struct SetUpActionBuilder {
-    func build() -> [[String: Any]] {
-        let content = "\(SwiftPackageConfig.current.repo)@${{ github.action_ref }}"
+
+    /// Workaround: https://github.com/actions/runner/issues/2473#issuecomment-1776051383/
+    func buildInputs() -> [String: Any] {
+        return [
+            "action_ref": [
+                "default": "${{ github.action_ref }}"
+            ]
+        ]
+    }
+
+    func buildSteps() -> [[String: Any]] {
+        let content = "\(SwiftPackageConfig.current.repo)@${{ inputs.action_ref }}"
         let action: [[String: Any]] = [
             [
                 "name": "Setup Swift",

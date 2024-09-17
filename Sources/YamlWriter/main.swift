@@ -22,6 +22,8 @@ struct YamlWriterCLI: ParsableCommand {
         try makeCLIYaml(
             command: Release.self,
             description: "Runs the process of creating GitHub Release with bump type and git ref")
+
+        try makeMintfile()
     }
 
     private func makeCLIYaml(command: ParsableCommand.Type, description: String) throws {
@@ -33,6 +35,17 @@ struct YamlWriterCLI: ParsableCommand {
             content: yaml,
             command: command,
             basePath: packDirectory().appendingPathComponent("Actions")
+        ).build()
+        print(actionPath)
+    }
+
+    private func makeMintfile() throws {
+        struct SetUp: ParsableCommand {}
+        let actionPath = try FileBuilder(
+            content: SwiftPackageConfig.current.packageForMint,
+            command: SetUp.self,
+            basePath: packDirectory().appendingPathComponent("Actions"),
+            file: "Mintfile"
         ).build()
         print(actionPath)
     }

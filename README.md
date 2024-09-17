@@ -14,6 +14,12 @@ This is a series of combinations:
   - to build the Swift package executable via Mint: [Mint](https://github.com/yonaskolb/Mint)  
   - and to cache the Swift package executable via: [setup-mint](https://github.com/irgaly/setup-mint)
 
+## Action: Release
+
+### Description
+
+The `Release` action creates on GitHub release using a Swift CLI tool. You can use it to bump major, minor, patch.
+
 ## Action: Comment
 
 ### Description

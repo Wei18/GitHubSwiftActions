@@ -1,3 +1,6 @@
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FWei18%2FGitHubSwiftActions%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/Wei18/GitHubSwiftActions)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FWei18%2FGitHubSwiftActions%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/Wei18/GitHubSwiftActions)
+
 # GitHub Swift Actions (Beta)
 
 ## Overview

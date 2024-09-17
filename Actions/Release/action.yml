@@ -1,13 +1,10 @@
 description: Runs the process of creating GitHub Release with bump type and git ref
 inputs:
-  bumpType:
-    description: The bumpType for the command.
-    required: true
-  gitRef:
-    description: The gitRef for the command.
-    required: true
   owner:
     description: The owner for the command.
+    required: true
+  ref:
+    description: The ref for the command.
     required: true
   repo:
     description: The repo for the command.
@@ -15,17 +12,20 @@ inputs:
   token:
     description: The token for the command.
     required: true
+  type:
+    description: The type for the command.
+    required: true
 name: Release
 runs:
   steps:
   - name: Setup Swift, Mint, Cache, etc.
     uses: Wei18/GitHubSwiftActions/Actions/SetUp@main
   - env:
-      BUMPTYPE: ${{ inputs.bumpType }}
-      GITREF: ${{ inputs.gitRef }}
       OWNER: ${{ inputs.owner }}
+      REF: ${{ inputs.ref }}
       REPO: ${{ inputs.repo }}
       TOKEN: ${{ inputs.token }}
+      TYPE: ${{ inputs.type }}
     name: Run Release
     run: ~/.mint/bin/mint run Wei18/GitHubSwiftActions@main Release
     shell: bash

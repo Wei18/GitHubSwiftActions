@@ -32,7 +32,8 @@ struct CLIYamlBuilder {
             ]
         }
 
-        inputs.merge(SetUpActionBuilder().buildInputs()) { _, new in new }
+        let factory = SetUpActionFactory()
+        inputs.merge(factory.buildInputs()) { _, new in new }
 
         let envDict = inputs.keys.reduce(into: [:]) { partialResult, value in
             partialResult[value.uppercased()] = "${{ inputs.\(value) }}"
@@ -48,14 +49,16 @@ struct CLIYamlBuilder {
             "inputs": inputs,
             "runs": [
                 "using": "composite",
-                "steps": SetUpActionBuilder().buildSteps() + [
+                "steps": factory.buildSteps() +
+                [
                     [
                         "name": "Run \(name)",
                         "run": "~/.mint/bin/mint run \(repo) \(name)",
                         "env": envDict,
                         "shell": "bash",
                     ],
-                ],
+                ] +
+                factory.buildPostSteps()
             ],
         ]
 
@@ -64,7 +67,7 @@ struct CLIYamlBuilder {
     }
 }
 
-private struct SetUpActionBuilder {
+private struct SetUpActionFactory {
 
     /// Workaround: https://github.com/actions/runner/issues/2473#issuecomment-1776051383/
     func buildInputs() -> [String: Any] {
@@ -87,18 +90,27 @@ private struct SetUpActionBuilder {
             ],
             [
                 "name": "Create Mintfile",
-                "run": "echo \(content) > ${{ github.action_path }}/Mintfile",
+                "run": "echo \(content) > Mintfile",
                 "shell": "bash",
             ],
             [
                 "name": "Setup Mint",
                 "uses": "irgaly/setup-mint@v1",
                 "with": [
-                    "mint-directory": "${{ github.action_path }}",
                     "mint-executable-directory": "~/.mint/bin",
                     "cache-prefix": "GitHubSwiftActions",
                 ],
+            ],
+        ]
+        return action
+    }
 
+    func buildPostSteps() -> [[String: Any]] {
+        let action: [[String: Any]] = [
+            [
+                "name": "Create Mintfile",
+                "run": "rm Mintfile",
+                "shell": "bash",
             ],
         ]
         return action

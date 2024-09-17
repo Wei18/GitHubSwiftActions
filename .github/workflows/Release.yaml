@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  create-github-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: Wei18/GitHubSwiftActions/Actions/Release@main
+      with:
+        owner: ${{ github.repository_owner }}
+        repo: ${{ github.event.repository.name }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        ref: ${{ github.ref }}
+        type: "patch"

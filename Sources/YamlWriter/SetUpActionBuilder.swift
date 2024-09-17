@@ -10,7 +10,7 @@ import Yams
 
 struct SetUpActionBuilder {
     func build() throws -> String {
-        let content = "\(SwiftPackageConfig.current.repo)@\(SwiftPackageConfig.current.version)"
+        let content = "\(SwiftPackageConfig.current.repo)@${{ github.action_ref }}"
         let action: [String: Any] = [
             "name": "SetUp",
             "runs": [

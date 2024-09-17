@@ -31,6 +31,7 @@ let package = Package(
             name: "CommentCLI",
             dependencies: [
                 .target(name: "CommentCore"),
+                .target(name: "Extensions"),
             ]
         ),
         .target(
@@ -53,6 +54,7 @@ let package = Package(
                 .product(name: "Yams", package: "Yams"),
                 .target(name: "CommentCLI"),
             ]
-        )
+        ),
+        .target(name: "Extensions")
     ]
 )

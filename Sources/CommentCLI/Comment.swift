@@ -8,6 +8,7 @@
 import Foundation
 import ArgumentParser
 import CommentCore
+import Extensions
 
 /// A command-line interface for creating or updating a comment on a GitHub issue or pull request.
 package struct Comment: ParsableCommand {
@@ -45,7 +46,7 @@ package struct Comment: ParsableCommand {
                 print("inputs.owner: \(owner)")
                 let repo = ProcessInfo.processInfo.environment["REPO"] ?? repo
                 print("inputs.repo: \(repo)")
-                let number = try Int(try: ProcessInfo.processInfo.environment["NUMBER"] ?? number)
+                let number = try Int(string: ProcessInfo.processInfo.environment["NUMBER"] ?? number)
                 print("inputs.number: \(number)")
                 let anchor = ProcessInfo.processInfo.environment["ANCHOR"] ?? anchor
                 print("inputs.anchor: \(anchor)")

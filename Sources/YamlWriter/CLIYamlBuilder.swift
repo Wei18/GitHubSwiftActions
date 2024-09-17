@@ -38,7 +38,6 @@ struct CLIYamlBuilder {
 
         let name = String(describing: command)
         let repo = SwiftPackageConfig.current.repo
-        let version = SwiftPackageConfig.current.version
 
         // Define the structure of the composite action
         let action: [String: Any] = [
@@ -50,7 +49,7 @@ struct CLIYamlBuilder {
                 "steps": [
                     [
                         "name": "Setup Swift, Mint, Cache, etc.",
-                        "uses": "\(repo)/Actions/SetUp@\(version)",
+                        "uses": "./Actions/SetUp",
                     ],
                     [
                         "name": "Run \(name)",

@@ -10,8 +10,6 @@ import Foundation
 struct SwiftPackageConfig {
     static let current = SwiftPackageConfig()
 
-    let version = "main"
-
     let repo = "Wei18/GitHubSwiftActions"
 
     private init() {}
